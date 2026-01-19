@@ -22,10 +22,10 @@
       <span class="italic text-green-700">Fast, easy, and hassle-free!</span>
     </p>
   </header>
-  <main class="max-w-2xl mx-auto">
-    <section class="space-y-8">
+  <main class="max-w-6xl mx-auto px-4">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- ST Certificate -->
-      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-blue-400 hover:scale-105 transition-transform duration-300">
+      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-blue-400 hover:scale-105 transition-transform duration-300 h-full doc-tile">
         <div class="flex items-center gap-3 mb-2">
           <!-- Document Icon -->
           <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -34,21 +34,26 @@
           </svg>
           <h2 class="text-2xl font-bold text-blue-700">Schedule Tribe Certificate</h2>
         </div>
-        <ul class="list-disc ml-8 text-gray-700 space-y-1">
-          <li>Birth Certificate Original (Scan/Shondur)</li>
-          <li>Residential Certificate - Rangbah Shnong (Scan/Shondur)</li>
-          <li>Passport Size Photo (Kawei)</li>
-          <li>Parents’ Schedule tribe - Mei lane Pa (Scan/Shondur)</li>
-          <li>Parents’ Voter Epic - mei lane i pa (Scan/Shondur)</li>
-          <li>Phone Number</li>
-        </ul>
-        <a href="St.html" class="self-end bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 text-white font-bold px-6 py-2 rounded-full shadow-lg mt-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
-          Apply Now
-        </a>
+        <div>
+          <p class="text-blue-600 mb-2 click-toggle cursor-pointer font-semibold" data-target="req-st" role="button" tabindex="0"><strong>Ki Kot donkam:</strong></p>
+          <ul id="req-st" class="req-list list-disc ml-8 text-gray-700 space-y-1 hidden">
+            <li>Phone Number</li>
+            <li>Passport Size Photo (Kawei)</li>
+            <li>Birth Certificate Original (Scan/Shondur)</li>
+            <li>Residential Certificate - Rangbah Shnong (Scan/Shondur)</li>
+            <li>Parents’s Schedule tribe - Mei lane Pa (Scan/Shondur)</li>
+            <li>Epic jongphi lane Parents’s Voter Epic - mei lane i pa (Scan/Shondur)</li>
+          </ul>
+        </div>
+        <div class="flex items-center justify-end mt-4">
+          <a href="St.html" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 text-white font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Apply Now
+          </a>
+        </div>
       </div>
 
       <!-- EPIC (Voter ID) -->
-      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-green-400 hover:scale-105 transition-transform duration-300">
+      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-green-400 hover:scale-105 transition-transform duration-300 h-full doc-tile">
         <div class="flex items-center gap-3 mb-2">
           <!-- Document Icon -->
           <svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -57,20 +62,25 @@
           </svg>
           <h2 class="text-2xl font-bold text-green-700">New EPIC (Voter ID)</h2>
         </div>
-        <ul class="list-disc ml-8 text-gray-700 space-y-1">
-          <li>Birth Certificate lane Babtisma</li>
-          <li>Address Proof (e.g. Aadhaar, Electricity Bill, Residential Certificate - Rangbah Shnong)</li>
-          <li>Recent Passport Photo</li>
-          <li>Parents’ Voter Epic - Mei lane i Pa (Scan/Shondur)</li>
-          <li>Phone Number</li>
-        </ul>
-        <a href="epic.html" class="self-end bg-gradient-to-r from-green-500 to-green-700 hover:from-green-700 hover:to-green-500 text-white font-bold px-6 py-2 rounded-full shadow-lg mt-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400">
-          Apply Now
-        </a>
+        <div>
+          <p class="text-blue-600 mb-2 click-toggle cursor-pointer font-semibold" data-target="req-epic" role="button" tabindex="0"><strong>Ki Kot donkam:</strong></p>
+          <ul id="req-epic" class="req-list list-disc ml-8 text-gray-700 space-y-1 hidden">
+            <li>Birth Certificate lane Babtisma</li>
+            <li>Address Proof (e.g. Aadhaar, Electricity Bill, Residential Certificate - Rangbah Shnong)</li>
+            <li>Recent Passport Photo</li>
+            <li>Parents’ Voter Epic - Mei lane i Pa (Scan/Shondur)</li>
+            <li>Phone Number</li>
+          </ul>
+        </div>
+        <div class="flex items-center justify-end mt-4">
+          <a href="epic.html" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-700 hover:to-green-500 text-white font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400">
+            Apply Now
+          </a>
+        </div>
       </div>
 
       <!-- PAN Card -->
-      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-purple-400 hover:scale-105 transition-transform duration-300">
+      <div class="bg-white shadow-2xl p-8 rounded-2xl flex flex-col gap-4 border-l-8 border-purple-400 hover:scale-105 transition-transform duration-300 h-full doc-tile">
         <div class="flex items-center gap-3 mb-2">
           <!-- Document Icon -->
           <svg class="w-7 h-7 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -79,19 +89,42 @@
           </svg>
           <h2 class="text-2xl font-bold text-purple-700">PAN Card</h2>
         </div>
-        <ul class="list-disc ml-8 text-gray-700 space-y-1">
-          <li>Aadhaar Card (Both Side)</li>
-          <li>Passport Size Photo</li>
-          <li>Signature (on white paper)</li>
-          <li>Mobile Number</li>
-          <li>Parent's Name (Mei/Pa)</li>
-          <li>Sngi kha (D.O.B)</li>
-        </ul>
-        <a href="Pan.html" class="self-end bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-700 hover:to-purple-500 text-white font-bold px-6 py-2 rounded-full shadow-lg mt-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">
-          Apply Now
-        </a>
+        <div>
+          <p class="text-blue-600 mb-2 click-toggle cursor-pointer font-semibold" data-target="req-pan" role="button" tabindex="0"><strong>Ki Kot donkam:</strong></p>
+          <ul id="req-pan" class="req-list list-disc ml-8 text-gray-700 space-y-1 hidden">
+            <li>Aadhaar Card (Both Side)</li>
+            <li>Passport Size Photo</li>
+            <li>Signature (on white paper)</li>
+            <li>Mobile Number</li>
+            <li>Parent's Name (Mei/Pa)</li>
+            <li>Sngi kha (D.O.B)</li>
+          </ul>
+        </div>
+        <div class="flex items-center justify-end mt-4">
+          <a href="pan.html" class="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-700 hover:to-purple-500 text-white font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            Apply Now
+          </a>
+        </div>
       </div>
     </section>
   </main>
+  <script>
+    (function(){
+      document.querySelectorAll('.doc-tile').forEach(tile => {
+        const label = tile.querySelector('.click-toggle');
+        const req = tile.querySelector('.req-list');
+        if(!label || !req) return;
+
+        const toggle = (ev) => {
+          if(ev){ ev.stopPropagation(); ev.preventDefault(); }
+          req.classList.toggle('hidden');
+        };
+
+        // attach exactly one handler per tile
+        label.addEventListener('click', toggle);
+        label.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(e); } });
+      });
+    })();
+  </script>
 </body>
 </html>
