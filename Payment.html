@@ -1,51 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pay Application Fee</title>
-  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-  <script>
-    UPLOADCARE_PUBLIC_KEY = '8e4b55a12a698dc8ade4';
-  </script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Kotnet Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --primary: #4f46e5;
+        }
+
+        .dark-mode {
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: radial-gradient(circle at bottom left, #eff6ff, #ffffff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode body {
+            background: radial-gradient(circle at bottom left, #1e293b, #0f172a);
+        }
+
+        .payment-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #d1fae5;
+            color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .dark-mode .success-icon {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .qr-section {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            display: inline-block;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        #qr-code {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+        }
+
+        .payment-info {
+            margin-bottom: 30px;
+        }
+
+        .payment-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .payment-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .price-badge span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .upload-section {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .upload-card {
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-card:hover {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .preview-img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 12px;
+            margin-top: 15px;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-box {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(79, 70, 229, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .contact-box:hover {
+            transform: scale(1.02);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .contact-box i {
+            color: var(--primary);
+        }
+
+        .contact-box span {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .submit-payment-btn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 16px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .submit-payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(79, 70, 229, 0.6);
+        }
+
+        .submit-payment-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans">
-  <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold mb-4 text-center text-green-700">Scan & Pay Application Fee</h1>
-    <p class="text-center mb-4 text-lg font-semibold text-gray-800">
-      Scan the code below to pay the application fee of <span class="text-green-700 font-bold">Rs 200/-</span>
-    </p>
-    <div class="flex justify-center mb-4">
-      <!-- Replace src with your actual QR code image -->
-      <img src="your-qr-code.png" alt="UPI QR Code" class="w-48 h-48 border-2 border-green-500 rounded-lg shadow-md">
-    </div>
-    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
-      <strong>IMPORTANT:</strong> Uploaded receipt should clearly show the <span class="font-bold">UPI transaction ID</span> with the screenshot. Else your application is liable to be rejected.
-    </div>
-    <form id="receiptForm" action="https://formspree.io/f/xzzvryge" method="POST" class="space-y-4">
-      <label class="block font-semibold">Upload Payment Receipt (required):
-        <input type="hidden" role="uploadcare-uploader" name="payment_receipt" data-clearable required id="receiptUploader"/>
-      </label>
-      <div class="flex justify-center">
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-2 rounded shadow transition-all duration-200">
-          Submit Application
-        </button>
-      </div>
-    </form>
-    <div class="text-center mt-6">
-      <a href="index.html" class="inline-block bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">⬅️ Back to Home</a>
-    </div>
-  </div>
-  <script>
-    // Prevent form submission if receipt is not uploaded
-    document.getElementById('receiptForm').addEventListener('submit', function(e) {
-      var receipt = document.querySelector('input[name="payment_receipt"]').value;
-      if (!receipt) {
-        alert('Please upload your payment receipt before submitting.');
-        e.preventDefault();
-      }
-    });
-  </script>
+
+<body>
+    <header class="top-nav">
+        <div class="container nav-flex">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Kotnet Logo" id="header-logo">
+                <span>Kotnet Digital</span>
+            </div>
+            <button id="theme-toggle" class="theme-btn">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="payment-container">
+        <div class="glass-card">
+            <div class="success-icon">
+                <i data-lucide="check-circle" style="width: 48px; height: 48px;"></i>
+            </div>
+
+            <div class="payment-info">
+                <h2>Application Submitted!</h2>
+                <div class="price-badge"><span>Amount:</span> Rs. 350</div>
+                <p>Please complete the payment to process your application.</p>
+            </div>
+
+            <div class="qr-section">
+                <img src="qrcode.png" alt="Payment QR Code" id="qr-code">
+                <p style="margin-top: 10px; font-weight: 600; color: #64748b;">Scan to Pay</p>
+            </div>
+
+            <form id="payment-confirm-form">
+                <div class="upload-section">
+                    <label style="font-weight: 600; margin-bottom: 10px; display: block;">Upload Payment
+                        Screenshot</label>
+                    <div class="upload-card" onclick="document.getElementById('payment-ss').click()">
+                        <input type="file" id="payment-ss" hidden accept="image/*" required
+                            onchange="handlePaymentSS(this)">
+                        <i data-lucide="camera"
+                            style="width: 32px; height: 32px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h4 id="upload-status">Click to upload screenshot</h4>
+                        <img id="ss-preview" class="preview-img">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-payment-btn" id="confirm-btn">Confirm Payment Submission</button>
+            </form>
+
+            <a href="tel:9862189403" class="contact-box">
+                <i data-lucide="phone-call"></i>
+                <div>
+                    <div style="font-size: 0.85rem; color: #64748b;">Having difficulties? Contact us:</div>
+                    <span>9862189403</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function handlePaymentSS(input) {
+            const preview = document.getElementById('ss-preview');
+            const status = document.getElementById('upload-status');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    status.textContent = 'Screenshot attached: ' + input.files[0].name;
+                }
+                reader.readAsDataURL(input.files[0]);
+
+                // Change icon to check
+                const icon = input.parentElement.querySelector('i');
+                icon.setAttribute('data-lucide', 'check-circle-2');
+                icon.style.color = '#10b981';
+                lucide.createIcons();
+            }
+        }
+
+        document.getElementById('payment-confirm-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('confirm-btn');
+            btn.textContent = 'Submitting...';
+            btn.disabled = true;
+
+            // Target Drive Folder: https://drive.google.com/drive/u/1/folders/1ZvNkZ8OTPXVx3Jz1RiFfu4ZMP34CDuNX
+
+            setTimeout(() => {
+                alert('Success! Your application and payment proof have been received. We will process it shortly.');
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeBtn.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.setAttribute('data-lucide', 'sun');
+            } else {
+                icon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        });
+    </script>
 </body>
+
 </html>
