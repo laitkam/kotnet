@@ -700,6 +700,7 @@
                             <p>Clear image or PDF</p>
                             <img id="preview-aadhaar-back" class="preview-img">
                         </div>
+<<<<<<< HEAD
 
                         <div class="upload-card" onclick="document.getElementById('file-other').click()">
                             <input type="file" id="file-other" hidden accept="image/*,application/pdf"
@@ -709,6 +710,8 @@
                             <p>Any extra document</p>
                             <img id="preview-other" class="preview-img">
                         </div>
+=======
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
                     </div>
 
                     <div class="form-actions">
@@ -867,14 +870,22 @@
 
         function showConfirmation() {
             // Document Check
+<<<<<<< HEAD
             const files = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back', 'file-other'];
+=======
+            const files = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back'];
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
             let missing = [];
             if (!document.getElementById('file-photo').files.length) missing.push("Photo");
             if (!document.getElementById('file-sign').files.length) missing.push("Signature");
             if (!document.getElementById('file-aadhaar-front').files.length) missing.push("Aadhaar Front");
+<<<<<<< HEAD
             if (!document.getElementById('file-aadhaar-front').files.length) missing.push("Aadhaar Front");
             if (!document.getElementById('file-aadhaar-back').files.length) missing.push("Aadhaar Back");
             // file-other is optional, so not checked here
+=======
+            if (!document.getElementById('file-aadhaar-back').files.length) missing.push("Aadhaar Back");
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
 
             if (missing.length > 0) {
                 alert('Please upload: ' + missing.join(", "));
@@ -1014,6 +1025,7 @@
                 doc.setFontSize(22);
                 doc.setTextColor(37, 99, 235);
                 doc.text("PAN CARD APPLICATION", 105, 20, { align: "center" });
+<<<<<<< HEAD
 
                 doc.setFontSize(14);
                 doc.setTextColor(100, 116, 139);
@@ -1021,10 +1033,16 @@
 
                 doc.setFontSize(12);
                 doc.setTextColor(30, 41, 59);
+=======
+                doc.setFontSize(14);
+                doc.text("Personal Details", 20, 40);
+                doc.setFontSize(12);
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
                 doc.text(`Name: ${name}`, 20, 50);
                 doc.text(`DOB: ${dob}`, 20, 60);
                 doc.text(`Gender: ${gender}`, 20, 70);
                 doc.text(`Phone: +91 ${phone}`, 20, 80);
+<<<<<<< HEAD
 
                 doc.setFontSize(14);
                 doc.setTextColor(100, 116, 139);
@@ -1038,11 +1056,21 @@
 
                 // Gather Files
                 const fileIds = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back', 'file-other'];
+=======
+                const pdfBase64 = doc.output('datauristring');
+
+                // Gather Files
+                const fileIds = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back'];
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
                 const fileData = [];
 
                 for (const id of fileIds) {
                     const input = document.getElementById(id);
+<<<<<<< HEAD
                     if (input && input.files && input.files[0]) {
+=======
+                    if (input.files && input.files[0]) {
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
                         const b64 = await fileToBase64(input.files[0]);
                         fileData.push({
                             name: input.files[0].name,
@@ -1069,7 +1097,11 @@
 
                 // Since no-cors doesn't return body data, we assume success if no error thrown
                 alert('Submission successful! Redirecting to payment page...');
+<<<<<<< HEAD
                 window.location.href = `payment.html?name=${encodeURIComponent(name)}`;
+=======
+                window.location.href = 'payment.html';
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
 
             } catch (error) {
                 console.error("Submission Error:", error);
@@ -1099,4 +1131,8 @@
     </script>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> dfbf3b88b3f662346426943200c75edda55cfc9d
