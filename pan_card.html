@@ -700,6 +700,15 @@
                             <p>Clear image or PDF</p>
                             <img id="preview-aadhaar-back" class="preview-img">
                         </div>
+
+                        <div class="upload-card" onclick="document.getElementById('file-other').click()">
+                            <input type="file" id="file-other" hidden accept="image/*,application/pdf"
+                                onchange="handleFileUpload(this, 'other')">
+                            <i data-lucide="folder-plus"></i>
+                            <h4>Other Document <span class="optional-badge">Optional</span></h4>
+                            <p>Any extra document</p>
+                            <img id="preview-other" class="preview-img">
+                        </div>
                     </div>
 
                     <div class="form-actions">
@@ -858,12 +867,14 @@
 
         function showConfirmation() {
             // Document Check
-            const files = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back'];
+            const files = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back', 'file-other'];
             let missing = [];
             if (!document.getElementById('file-photo').files.length) missing.push("Photo");
             if (!document.getElementById('file-sign').files.length) missing.push("Signature");
             if (!document.getElementById('file-aadhaar-front').files.length) missing.push("Aadhaar Front");
+            if (!document.getElementById('file-aadhaar-front').files.length) missing.push("Aadhaar Front");
             if (!document.getElementById('file-aadhaar-back').files.length) missing.push("Aadhaar Back");
+            // file-other is optional, so not checked here
 
             if (missing.length > 0) {
                 alert('Please upload: ' + missing.join(", "));
@@ -1003,22 +1014,35 @@
                 doc.setFontSize(22);
                 doc.setTextColor(37, 99, 235);
                 doc.text("PAN CARD APPLICATION", 105, 20, { align: "center" });
+
                 doc.setFontSize(14);
+                doc.setTextColor(100, 116, 139);
                 doc.text("Personal Details", 20, 40);
+
                 doc.setFontSize(12);
+                doc.setTextColor(30, 41, 59);
                 doc.text(`Name: ${name}`, 20, 50);
                 doc.text(`DOB: ${dob}`, 20, 60);
                 doc.text(`Gender: ${gender}`, 20, 70);
                 doc.text(`Phone: +91 ${phone}`, 20, 80);
+
+                doc.setFontSize(14);
+                doc.setTextColor(100, 116, 139);
+                doc.text("Parent Details", 20, 100);
+
+                doc.setFontSize(12);
+                doc.setTextColor(30, 41, 59);
+                doc.text(`${parentType.charAt(0).toUpperCase() + parentType.slice(1)}'s Name: ${parentName}`, 20, 110);
+
                 const pdfBase64 = doc.output('datauristring');
 
                 // Gather Files
-                const fileIds = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back'];
+                const fileIds = ['file-photo', 'file-sign', 'file-aadhaar-front', 'file-aadhaar-back', 'file-other'];
                 const fileData = [];
 
                 for (const id of fileIds) {
                     const input = document.getElementById(id);
-                    if (input.files && input.files[0]) {
+                    if (input && input.files && input.files[0]) {
                         const b64 = await fileToBase64(input.files[0]);
                         fileData.push({
                             name: input.files[0].name,
@@ -1045,7 +1069,7 @@
 
                 // Since no-cors doesn't return body data, we assume success if no error thrown
                 alert('Submission successful! Redirecting to payment page...');
-                window.location.href = 'payment.html';
+                window.location.href = `payment.html?name=${encodeURIComponent(name)}`;
 
             } catch (error) {
                 console.error("Submission Error:", error);
